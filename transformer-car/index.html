@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer Car Animation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Robot/Transformer Car Animation</h1>
+        <div class="animation-canvas">
+            <svg viewBox="0 0 800 600" class="transformer-car">
+                <!-- Car Body -->
+                <g class="car-body" id="carBody">
+                    <!-- Main chassis -->
+                    <rect class="chassis" x="150" y="250" width="500" height="150" rx="20"/>
+                    <!-- Wheels -->
+                    <circle class="wheel" cx="250" cy="420" r="40"/>
+                    <circle class="wheel" cx="550" cy="420" r="40"/>
+                    <!-- Windows -->
+                    <rect class="window" x="200" y="280" width="80" height="50" rx="5"/>
+                    <rect class="window" x="520" y="280" width="80" height="50" rx="5"/>
+                </g>
+
+                <!-- Robot Head -->
+                <g class="robot-head" id="robotHead" style="opacity: 0;">
+                    <rect class="head-box" x="300" y="50" width="200" height="180" rx="10"/>
+                    <!-- Eyes -->
+                    <rect class="eye" x="340" y="100" width="40" height="40" rx="5"/>
+                    <rect class="eye" x="420" y="100" width="40" height="40" rx="5"/>
+                    <!-- Mouth/Panel -->
+                    <rect class="mouth" x="340" y="160" width="120" height="30" rx="5"/>
+                </g>
+
+                <!-- Robot Body Parts -->
+                <g class="robot-body" id="robotBody" style="opacity: 0;">
+                    <!-- Torso -->
+                    <rect class="torso" x="300" y="250" width="200" height="180" rx="10"/>
+                    <!-- Left Arm -->
+                    <g class="left-arm">
+                        <rect class="arm-segment" x="200" y="280" width="80" height="60" rx="5"/>
+                        <rect class="arm-segment" x="120" y="300" width="80" height="50" rx="5"/>
+                    </g>
+                    <!-- Right Arm -->
+                    <g class="right-arm">
+                        <rect class="arm-segment" x="520" y="280" width="80" height="60" rx="5"/>
+                        <rect class="arm-segment" x="600" y="300" width="80" height="50" rx="5"/>
+                    </g>
+                </g>
+
+                <!-- Robot Legs -->
+                <g class="robot-legs" id="robotLegs" style="opacity: 0;">
+                    <!-- Left Leg -->
+                    <g class="left-leg">
+                        <rect class="leg-segment" x="320" y="440" width="60" height="100" rx="5"/>
+                        <rect class="leg-segment" x="310" y="540" width="80" height="40" rx="5"/>
+                    </g>
+                    <!-- Right Leg -->
+                    <g class="right-leg">
+                        <rect class="leg-segment" x="420" y="440" width="60" height="100" rx="5"/>
+                        <rect class="leg-segment" x="410" y="540" width="80" height="40" rx="5"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <div class="controls">
+            <button id="transformBtn" class="btn">Transform!</button>
+            <button id="resetBtn" class="btn">Reset</button>
+        </div>
+        <p class="instruction">Click "Transform!" to see the car transform into a robot</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 90%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #667eea;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.animation-canvas {
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Car Styles */
+.chassis {
+    fill: #E74C3C;
+    stroke: #C0392B;
+    stroke-width: 3;
+}
+
+.wheel {
+    fill: #2C3E50;
+    stroke: #34495E;
+    stroke-width: 2;
+}
+
+.wheel::after {
+    content: '';
+    position: absolute;
+}
+
+.window {
+    fill: #87CEEB;
+    stroke: #2C3E50;
+    stroke-width: 2;
+    opacity: 0.7;
+}
+
+/* Robot Head Styles */
+.head-box {
+    fill: #F39C12;
+    stroke: #D68910;
+    stroke-width: 3;
+}
+
+.eye {
+    fill: #2980B9;
+    stroke: #1F618D;
+    stroke-width: 2;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+    0%, 49%, 100% {
+        fill: #2980B9;
+        height: 40;
+    }
+    50%, 99% {
+        fill: #34495E;
+        height: 5;
+    }
+}
+
+.mouth {
+    fill: #E67E22;
+    stroke: #D35400;
+    stroke-width: 2;
+}
+
+/* Robot Body Styles */
+.torso {
+    fill: #E74C3C;
+    stroke: #C0392B;
+    stroke-width: 3;
+}
+
+.arm-segment {
+    fill: #3498DB;
+    stroke: #2980B9;
+    stroke-width: 2;
+}
+
+.leg-segment {
+    fill: #95A5A6;
+    stroke: #7F8C8D;
+    stroke-width: 2;
+}
+
+/* Animation Classes */
+.car-body {
+    transform-origin: 400px 325px;
+    transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.robot-head {
+    transform-origin: 400px 140px;
+    transition: opacity 0.8s ease-in-out 0.3s, transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.robot-body {
+    transform-origin: 400px 340px;
+    transition: opacity 0.8s ease-in-out 0.5s, transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.robot-legs {
+    transform-origin: 400px 490px;
+    transition: opacity 0.8s ease-in-out 0.7s, transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Transformation State */
+.transformer-car.transformed .car-body {
+    opacity: 0;
+    transform: scale(0.8) rotate(-180deg);
+}
+
+.transformer-car.transformed .robot-head {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.transformer-car.transformed .robot-body {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.transformer-car.transformed .robot-legs {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+/* Left Arm Animation */
+.left-arm {
+    transform-origin: 240px 310px;
+    transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s;
+}
+
+.transformer-car.transformed .left-arm {
+    transform: rotate(-45deg);
+}
+
+/* Right Arm Animation */
+.right-arm {
+    transform-origin: 560px 310px;
+    transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s;
+}
+
+.transformer-car.transformed .right-arm {
+    transform: rotate(45deg);
+}
+
+/* Left Leg Animation */
+.left-leg {
+    transform-origin: 350px 490px;
+    transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.6s;
+}
+
+.transformer-car.transformed .left-leg {
+    transform: rotate(-20deg);
+}
+
+/* Right Leg Animation */
+.right-leg {
+    transform-origin: 450px 490px;
+    transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.6s;
+}
+
+.transformer-car.transformed .right-leg {
+    transform: rotate(20deg);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#transformBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+#transformBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+#transformBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
+}
+
+#resetBtn {
+    background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
+    color: white;
+}
+
+#resetBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+}
+
+#resetBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(245, 87, 108, 0.4);
+}
+
+.instruction {
+    text-align: center;
+    color: #7F8C8D;
+    font-size: 1em;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
